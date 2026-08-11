@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UA-RIS &middot; NSF CAREER &middot; Transforming Underwater Networking with Acoustic Reconfigurable Intelligent Surfaces</title>
+<meta name="description" content="NSF CAREER project (Award 2544545) led by Prof. Lina Pu at The University of Alabama, building underwater acoustic reconfigurable intelligent surfaces (UA-RIS) for high-rate communication and in-situ localization on the seafloor.">
+<meta name="author" content="Lina Pu, The University of Alabama">
+<meta property="og:title" content="Transforming Underwater Networking with Acoustic Reconfigurable Intelligent Surfaces">
+<meta property="og:description" content="NSF CAREER Award 2544545. Severing the ocean's surface umbilical with ultra-low-power programmable acoustic surfaces on the seafloor.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23062a3d'/><g fill='none' stroke='%232dd4bf' stroke-width='7' stroke-linecap='round'><path d='M22 70h56'/><path d='M30 70V52'/><path d='M44 70V44'/><path d='M58 70V44'/><path d='M72 70V52'/></g><circle cx='50' cy='26' r='7' fill='%232dd4bf'/></svg>">
+
+<script>
+// Defined before the body parses so inline onerror handlers can call it.
+function ph(name){
+  var d=document.createElement('div');
+  d.className='ph';
+  d.innerHTML='<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/>'+
+              '<circle cx="8.5" cy="10" r="1.6"/><path d="m5 17 4.5-4.5L13 16l2.5-2.5L20 18"/></svg>'+
+              '<code>images/'+name+'</code>';
+  return d;
+}
+</script>
+
+<style>
+:root{
+  --ink:#0a1720;
+  --body:#31414c;
+  --muted:#64748b;
+  --ocean-900:#04202f;
+  --ocean-800:#062a3d;
+  --ocean-700:#0a3d57;
+  --accent:#0f9b8e;
+  --accent-bright:#2dd4bf;
+  --crimson:#9e1b32;
+  --paper:#ffffff;
+  --shell:#f4f7f8;
+  --line:#dde5e9;
+  --radius:14px;
+  --maxw:1120px;
+  --measure:72ch;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:74px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--body);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Source Serif 4",Georgia,serif;color:var(--ink);line-height:1.2;margin:0 0 .5em;font-weight:600}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+p{margin:0 0 1.1em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.measure{max-width:var(--measure)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:18px;height:64px}
+.nav .nsf{display:flex;align-items:center;flex:0 0 auto}
+.nav .nsf img{height:38px;width:auto;display:block}
+.nav .nsf+.brand{padding-left:18px;border-left:1px solid var(--line)}
+.brand{font-family:"Source Serif 4",serif;font-weight:700;color:var(--ink);font-size:1.06rem;letter-spacing:-.01em;white-space:nowrap}
+.brand span{color:var(--accent)}
+.nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav ul a{color:var(--body);font-size:.86rem;font-weight:500;white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent}
+.nav ul a:hover,.nav ul a.on{color:var(--ink);border-bottom-color:var(--accent);text-decoration:none}
+
+/* ---------- hero ---------- */
+.hero{
+  background:
+    radial-gradient(1100px 520px at 82% -8%, rgba(45,212,191,.20), transparent 62%),
+    radial-gradient(760px 420px at 8% 108%, rgba(14,165,233,.16), transparent 60%),
+    linear-gradient(168deg,var(--ocean-900) 0%,var(--ocean-800) 48%,var(--ocean-700) 100%);
+  color:#e6f2f5;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:100% 46px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 40%,transparent);
+          mask-image:linear-gradient(to bottom,transparent,#000 40%,transparent);
+}
+.hero-in{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:78px 28px 66px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:#a9e9e0;border:1px solid rgba(45,212,191,.4);
+  background:rgba(45,212,191,.10);padding:7px 14px;border-radius:999px;margin-bottom:22px
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px rgba(45,212,191,.22)}
+.hero h1{color:#fff;font-size:clamp(2.05rem,4.3vw,3.25rem);letter-spacing:-.02em;margin-bottom:.45em;font-weight:700}
+.hero .lede{font-size:1.1rem;color:#c3dde4;max-width:60ch;margin-bottom:26px}
+.hero .pi{font-size:.98rem;color:#e6f2f5;margin-bottom:26px}
+.hero .pi strong{color:#fff}
+.hero .pi span{color:#9fc3ce}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px;padding:0;list-style:none}
+.chips li{font-size:.79rem;color:#cfe6ec;background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:6px 12px;font-variant-numeric:tabular-nums}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;background:var(--accent-bright);color:#04202f;
+  font-weight:600;font-size:.9rem;padding:12px 20px;border-radius:10px;border:1px solid transparent
+}
+.btn:hover{background:#5eead4;text-decoration:none}
+.btn.ghost{background:transparent;color:#cfe6ec;border-color:rgba(255,255,255,.28)}
+.btn.ghost:hover{background:rgba(255,255,255,.08);color:#fff}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+.hero-fig{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:20px}
+.hero-fig svg{width:100%;height:auto;display:block}
+.hero-fig figcaption{font-size:.76rem;color:#9fc3ce;margin-top:12px;line-height:1.5}
+
+/* ---------- sections ---------- */
+section{padding:82px 0;border-top:1px solid var(--line)}
+section.alt{background:var(--shell)}
+.kicker{
+  font-size:.71rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;display:block
+}
+h2{font-size:clamp(1.65rem,2.9vw,2.2rem);letter-spacing:-.015em;margin-bottom:.55em}
+.sub{font-size:1.06rem;color:var(--muted);max-width:66ch;margin-bottom:44px}
+h3{font-size:1.16rem;margin-bottom:.45em}
+
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+section.alt .card{background:#fff}
+.card p:last-child{margin-bottom:0}
+.card .num{
+  font-family:"Source Serif 4",serif;font-size:.8rem;font-weight:700;color:var(--accent);
+  letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px
+}
+
+/* pull quote */
+.pull{
+  border-left:3px solid var(--accent);padding:6px 0 6px 24px;margin:0 0 36px;
+  font-family:"Source Serif 4",serif;font-size:1.3rem;line-height:1.5;color:var(--ink);max-width:62ch
+}
+
+/* research objectives */
+.obj{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px}
+.obj .badge{
+  display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(150deg,var(--ocean-700),var(--ocean-900));color:#7fe6da;margin-bottom:16px
+}
+.obj .badge b{font-family:"Source Serif 4",serif;font-size:1.15rem;letter-spacing:0}
+.obj p{margin-bottom:0;font-size:.96rem}
+
+/* outreach cards with a figure on top */
+.figcard{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.figcard .shotrow{
+  background:var(--shell);border-bottom:1px solid var(--line);padding:24px;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:end
+}
+.figcard .shotrow figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.figcard .shotrow img{max-width:100%;max-height:360px;width:auto;height:auto;display:block;border-radius:6px}
+.figcard .shotrow figcaption{font-size:.79rem;color:var(--muted);text-align:center}
+.figcard .num,.figcard h3,.figcard p{padding-left:26px;padding-right:26px}
+.figcard .num{margin-top:24px}
+.figcard p{font-size:.94rem;padding-bottom:26px;margin-bottom:0}
+
+/* publications */
+.pubs{list-style:none;padding:0;margin:0;counter-reset:pub}
+.pubs li{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 26px 22px 62px;margin-bottom:14px;position:relative
+}
+.pubs li::before{
+  counter-increment:pub;content:counter(pub);position:absolute;left:22px;top:23px;
+  font-family:"Source Serif 4",serif;font-weight:700;color:var(--accent);font-size:1.05rem
+}
+.pubs .t{font-family:"Source Serif 4",serif;font-size:1.08rem;font-weight:600;color:var(--ink);
+  display:block;margin-bottom:6px;line-height:1.35}
+.pubs .a{font-size:.92rem;color:var(--body);display:block;margin-bottom:4px}
+.pubs .a em{font-style:normal;color:var(--ink);font-weight:600;border-bottom:2px solid rgba(15,155,142,.35)}
+.pubs .v{font-size:.88rem;color:var(--muted);display:block}
+.pubs .links{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.03em;padding:4px 10px;
+  border-radius:6px;background:var(--shell);border:1px solid var(--line);color:var(--body)
+}
+a.tag:hover{background:#e7f4f2;border-color:var(--accent);color:var(--accent);text-decoration:none}
+.tag.new{background:rgba(158,27,50,.08);border-color:rgba(158,27,50,.28);color:var(--crimson)}
+
+/* people */
+.person{display:grid;grid-template-columns:170px minmax(0,1fr);gap:30px;align-items:start;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;max-width:820px}
+.person .ph{width:170px;height:170px;border-radius:12px;object-fit:cover;background:var(--shell);display:block}
+.person h3{margin-bottom:2px}
+.person .role{font-size:.9rem;color:var(--accent);font-weight:600;margin-bottom:2px}
+.person .aff{font-size:.9rem;color:var(--muted);margin-bottom:14px}
+.person p{font-size:.95rem}
+.join{margin-top:24px;background:linear-gradient(135deg,var(--ocean-900),var(--ocean-700));
+  color:#cfe6ec;border-radius:var(--radius);padding:26px 30px;max-width:820px}
+.join h3{color:#fff;margin-bottom:.4em}
+.join p{margin-bottom:0;font-size:.95rem;color:#bcd9e1}
+.join a{color:var(--accent-bright)}
+
+/* photos */
+.gallery{columns:2;column-gap:18px}
+figure.shot{
+  margin:0 0 18px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%
+}
+figure.shot img{width:100%;height:auto;display:block;background:var(--shell)}
+figure.shot.portrait img{width:auto;max-width:100%;max-height:450px;margin:0 auto;padding:14px 0}
+figure.shot figcaption{padding:16px 18px;font-size:.86rem;color:var(--body);line-height:1.55}
+figure.shot figcaption b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px;font-size:.95rem}
+
+/* footer */
+footer{background:var(--ocean-900);color:#a9c6d0;padding:56px 0 40px;font-size:.9rem}
+footer h4{color:#fff;font-size:1rem;margin-bottom:.5em}
+footer a{color:var(--accent-bright)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;margin-bottom:36px}
+.ack{background:rgba(255,255,255,.05);border-left:3px solid var(--accent);
+  padding:18px 22px;border-radius:0 10px 10px 0;font-size:.86rem;line-height:1.6;color:#bcd9e1}
+.foot-links{list-style:none;padding:0;margin:0}
+.foot-links li{margin-bottom:8px}
+.legal{border-top:1px solid rgba(255,255,255,.12);padding-top:22px;font-size:.8rem;color:#7d9aa5;
+  display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+@media (max-width:980px){
+  .hero-in{grid-template-columns:1fr;gap:38px;padding:56px 28px 52px}
+  .grid-3,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot-grid{grid-template-columns:1fr;gap:30px}
+}
+@media (max-width:680px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .nav-in{padding:0 20px;gap:16px}
+  .brand{font-size:.95rem}
+  .nav ul{gap:16px}
+  section{padding:58px 0}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .gallery{columns:1}
+  figure.shot.portrait img{max-height:none;width:100%;padding:0}
+  .figcard .shotrow{grid-template-columns:1fr;gap:26px}
+  .person{grid-template-columns:1fr;gap:20px}
+  .person .ph{width:130px;height:130px}
+  .pubs li{padding:20px 20px 20px 54px}
+}
+@media print{
+  .nav,.hero::after{display:none}
+  body{font-size:11pt}
+  section{padding:20px 0;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nsf" href="https://www.nsf.gov" target="_blank" rel="noopener"
+       aria-label="U.S. National Science Foundation">
+      <img id="nsf-logo" src="images/nsf-logo.png" alt="U.S. National Science Foundation">
+    </a>
+    <a class="brand" href="#top">UA&#8209;RIS<span>.</span> <span style="font-weight:400;color:var(--muted);font-size:.85rem">NSF CAREER</span></a>
+    <ul>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#objectives">Objectives</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#outreach">Education &amp; Outreach</a></li>
+      <li><a href="#photos">Photos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-in">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> NSF CAREER Award &middot; 2544545</span>
+      <h1>Transforming Underwater Networking with Acoustic Reconfigurable Intelligent Surfaces</h1>
+      <p class="lede">Severing the ocean's &ldquo;surface umbilical&rdquo; by embedding ultra&#8209;low&#8209;power programmable acoustic surfaces in the seafloor, turning the seabed itself into a self&#8209;sustaining information backbone for high&#8209;rate communication and in&#8209;situ localization.</p>
+      <p class="pi"><strong>Lina Pu</strong>, Principal Investigator<br>
+      <span>Department of Computer Science, The University of Alabama</span></p>
+      <ul class="chips">
+        <li>Jul 2026 &ndash; Jun 2031</li>
+        <li>$599,148</li>
+        <li>NSF CISE / IIS</li>
+        <li>Faculty Early Career Development (CAREER)</li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn" href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2544545" target="_blank" rel="noopener">
+          NSF Award Page
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="btn ghost" href="#publications">Publications</a>
+      </div>
+    </div>
+
+    <figure class="hero-fig">
+      <!-- Original schematic: transmitter -> seabed UA-RIS -> receiver -->
+      <svg viewBox="0 0 460 300" role="img" aria-label="Schematic of a seabed-mounted UA-RIS steering acoustic reflections from a sending vehicle to a receiving vehicle">
+        <defs>
+          <linearGradient id="wcol" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2dd4bf" stop-opacity=".30"/>
+            <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="bed" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0d4a68"/><stop offset="100%" stop-color="#04202f"/>
+          </linearGradient>
+        </defs>
+        <!-- sea surface -->
+        <path d="M0 26 q23 -11 46 0 t46 0 t46 0 t46 0 t46 0 t46 0 t46 0 t46 0 t46 0" fill="none" stroke="#7fe6da" stroke-opacity=".45" stroke-width="2"/>
+        <rect x="0" y="28" width="460" height="18" fill="url(#wcol)"/>
+        <text x="8" y="18" fill="#9fc3ce" font-size="10" font-family="Inter,sans-serif">sea surface (no buoy, no cable)</text>
+
+        <!-- seabed -->
+        <path d="M0 250 q60 -16 120 -4 t120 -6 t120 2 t100 -4 V300 H0 Z" fill="url(#bed)" stroke="#0d4a68"/>
+        <text x="8" y="290" fill="#5f8b9c" font-size="10" font-family="Inter,sans-serif">seafloor</text>
+
+        <!-- blocked direct path -->
+        <path d="M92 108 L368 128" stroke="#7d9aa5" stroke-width="1.6" stroke-dasharray="5 5" opacity=".55"/>
+        <text x="196" y="102" fill="#7d9aa5" font-size="9.5" font-family="Inter,sans-serif">weak direct path</text>
+
+        <!-- reflected paths via RIS -->
+        <path d="M92 112 L228 232" stroke="#2dd4bf" stroke-width="2.4" opacity=".95"/>
+        <path d="M228 232 L368 132" stroke="#2dd4bf" stroke-width="2.4" opacity=".95"/>
+        <path d="M92 112 L196 236" stroke="#2dd4bf" stroke-width="1.5" opacity=".4"/>
+        <path d="M196 236 L368 136" stroke="#2dd4bf" stroke-width="1.5" opacity=".4"/>
+
+        <!-- angle marks -->
+        <path d="M212 214 a24 24 0 0 1 30 2" fill="none" stroke="#7fe6da" stroke-width="1.2" opacity=".8"/>
+        <text x="236" y="206" fill="#7fe6da" font-size="10" font-family="Inter,sans-serif">&#952;</text>
+
+        <!-- UA-RIS panel -->
+        <g transform="translate(228 236) rotate(-8)">
+          <rect x="-46" y="-9" width="92" height="14" rx="3" fill="#0a3d57" stroke="#2dd4bf" stroke-width="1.6"/>
+          <g fill="#2dd4bf">
+            <rect x="-40" y="-6" width="8" height="8" rx="1.5"/><rect x="-28" y="-6" width="8" height="8" rx="1.5"/>
+            <rect x="-16" y="-6" width="8" height="8" rx="1.5"/><rect x="-4" y="-6" width="8" height="8" rx="1.5"/>
+            <rect x="8" y="-6" width="8" height="8" rx="1.5"/><rect x="20" y="-6" width="8" height="8" rx="1.5"/>
+            <rect x="32" y="-6" width="8" height="8" rx="1.5"/>
+          </g>
+          <rect x="-46" y="5" width="92" height="7" rx="2" fill="#062a3d" stroke="#0d4a68"/>
+        </g>
+        <text x="182" y="266" fill="#7fe6da" font-size="11" font-weight="600" font-family="Inter,sans-serif">UA&#8209;RIS panel (sub&#8209;watt, fully passive)</text>
+
+        <!-- sending AUV -->
+        <g transform="translate(72 108)">
+          <ellipse cx="0" cy="0" rx="24" ry="9" fill="#e6f2f5"/>
+          <path d="M-24 0 l-11 -7 v14 Z" fill="#9fc3ce"/>
+          <circle cx="12" cy="0" r="3" fill="#0f9b8e"/>
+        </g>
+        <text x="34" y="88" fill="#cfe6ec" font-size="10.5" font-family="Inter,sans-serif">sending AUV</text>
+
+        <!-- receiving AUV -->
+        <g transform="translate(388 130)">
+          <ellipse cx="0" cy="0" rx="24" ry="9" fill="#e6f2f5"/>
+          <path d="M24 0 l11 -7 v14 Z" fill="#9fc3ce"/>
+          <circle cx="-12" cy="0" r="3" fill="#0f9b8e"/>
+        </g>
+        <text x="340" y="110" fill="#cfe6ec" font-size="10.5" font-family="Inter,sans-serif">receiving AUV</text>
+
+        <!-- energy harvester -->
+        <g transform="translate(392 224)">
+          <rect x="-16" y="-8" width="32" height="16" rx="4" fill="#062a3d" stroke="#0d4a68"/>
+          <path d="M-4 -4 l-4 6 h6 l-4 6" fill="none" stroke="#facc15" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <text x="330" y="252" fill="#5f8b9c" font-size="9.5" font-family="Inter,sans-serif">wave / current harvester</text>
+      </svg>
+      <figcaption>A seabed&#8209;mounted UA&#8209;RIS coherently steers reflected acoustic energy toward the receiver, extending range and raising data rate at a fraction of the transmit power, while the same reflector array supplies angle information for positioning without surfacing.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ VISION ============ -->
+<section id="vision">
+  <div class="wrap">
+    <span class="kicker">Research Vision</span>
+    <h2>An ocean that no longer has to surface to speak</h2>
+
+    <p class="pull">The aspiration of this CAREER project is a low&#8209;signature UA&#8209;RIS network that delivers high&#8209;rate communication and in&#8209;situ localization for the next generation of underwater networks.</p>
+
+    <div class="grid-2" style="align-items:start;gap:44px">
+      <div class="measure">
+        <p>The ocean underwrites nearly every pillar of modern society, yet it remains a blind spot in national infrastructure. Only about a quarter of the seafloor has been mapped, and that figure has barely moved since the Apollo era. The bottleneck is not sensing technology. It is the absence of underwater communication and localization infrastructure.</p>
+        <p>Electromagnetic waves are extinguished within meters of seawater. Acoustic links remain bandwidth&#8209;starved over kilometer scales, and there is no positioning infrastructure below the surface at all. As a result, today's ocean observatory backbone is still a <em>surface umbilical</em>: million&#8209;dollar buoys, even costlier cabled systems, and autonomous vehicles that must surface for every position fix and data dump.</p>
+        <p>This project breaks that dependence by moving communication and localization down to the seabed. Each UA&#8209;RIS panel is an electronically tunable array of piezoelectric reflectors that can steer, focus, and combine acoustic energy, and that can provide angle&#8209;based localization, all while drawing sub&#8209;watt power that emerging wave and bio&#8209;chemical harvesters can supply.</p>
+      </div>
+
+      <div style="display:grid;gap:18px">
+        <div class="card">
+          <span class="num">Design choice 01</span>
+          <h3>Seabed&#8209;mounted, not surface&#8209;mounted</h3>
+          <p>Surface infrastructure demands mooring and anchoring, suffers mechanical fatigue from waves and storms, and is exposed to vandalism, vessel strikes, and biofouling. Surface motion also injects noise into acoustic systems, and dense buoy fields obstruct navigation lanes. These factors impose hard scalability limits that a seabed deployment simply avoids.</p>
+        </div>
+        <div class="card">
+          <span class="num">Design choice 02</span>
+          <h3>Passive reflectors, not active relays</h3>
+          <p>Conventional relays receive, decode, and retransmit, typically consuming tens of watts. Sustaining that underwater means tethering to a solar buoy or running cable to shore, which reintroduces every surface vulnerability. UA&#8209;RIS panels contain no active front ends and consume sub&#8209;watt power, low enough to be met by ocean energy harvesting.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:58px;margin-bottom:18px">Where this leads</h3>
+    <div class="grid-3">
+      <div class="card">
+        <span class="num">Long term</span>
+        <h3>AUV mobile networks</h3>
+        <p>Swarms of affordable vehicles moving through UA&#8209;RIS&#8209;enabled seafloor corridors, holding high&#8209;rate connectivity for telemetry and for distributed AI in which vehicles share learned models and adapt missions in real time.</p>
+      </div>
+      <div class="card">
+        <span class="num">Long term</span>
+        <h3>High&#8209;resolution aquatic observatories</h3>
+        <p>Dense carpets of UA&#8209;RIS nodes supporting always&#8209;connected biological, chemical, and geophysical instruments on the seabed, capturing fine&#8209;scale processes such as sediment transport at unprecedented fidelity.</p>
+      </div>
+      <div class="card">
+        <span class="num">Long term</span>
+        <h3>Maritime security and resilience</h3>
+        <p>Because the panels operate passively and can be embedded in the seabed, they offer covert, resistant links for harbor defense, subsea asset monitoring, and disaster&#8209;response robotics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OBJECTIVES ============ -->
+<section id="objectives" class="alt">
+  <div class="wrap">
+    <span class="kicker">Research Objectives</span>
+    <h2>Three objectives</h2>
+    <p class="sub">The existing body of RIS knowledge is rooted in terrestrial radio frequency settings. Because acoustic and RF signals differ fundamentally, RF&#8209;RIS architectures, algorithms, and protocols cannot be carried over directly. This project pursues an end&#8209;to&#8209;end agenda spanning communication, localization, and networking.</p>
+
+    <div class="grid-3">
+      <article class="obj">
+        <span class="badge"><b>01</b></span>
+        <h3>Communication</h3>
+        <p>Advance the UA&#8209;RIS architecture and establish the fundamental performance limits of UA&#8209;RIS communication in complex underwater environments, so that predicted gains can be trusted before a system ever reaches the water.</p>
+      </article>
+      <article class="obj">
+        <span class="badge"><b>02</b></span>
+        <h3>Localization</h3>
+        <p>Enable underwater systems to determine where they are using fully passive reflector panels, removing the dependence on active front ends and on surfacing for a position fix.</p>
+      </article>
+      <article class="obj">
+        <span class="badge"><b>03</b></span>
+        <h3>Networking</h3>
+        <p>Establish network&#8209;scale medium&#8209;access principles for UA&#8209;RIS networks, where second&#8209;scale propagation delays and decentralized, mobile users break the assumptions behind terrestrial designs.</p>
+      </article>
+    </div>
+
+    <p style="font-size:.92rem;color:var(--muted);max-width:70ch;margin-top:30px;margin-bottom:0">
+      Results, models, datasets, and open&#8209;source tools will be posted here and released publicly as they are published.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section id="publications">
+  <div class="wrap">
+    <span class="kicker">Related Publications</span>
+    <h2>Publications</h2>
+    <p class="sub">Work by the project team on underwater acoustic reconfigurable intelligent surfaces, including the groundwork that this CAREER project builds upon.</p>
+
+    <ol class="pubs">
+      <li>
+        <span class="t">Multilayered Intelligent Reflecting Surface for Long-Range Underwater Acoustic Communication</span>
+        <span class="a"><em>Lina Pu</em>, Yu Luo, and Aijun Song</span>
+        <span class="v">IEEE Journal of Oceanic Engineering, 2026.</span>
+        <span class="links">
+          <span class="tag new">Latest</span>
+          <span class="tag">Journal</span>
+          <a class="tag" href="https://arxiv.org/abs/2501.18355" target="_blank" rel="noopener">arXiv:2501.18355</a>
+        </span>
+      </li>
+      <li>
+        <span class="t">Experimental Study of Underwater Acoustic Reconfigurable Intelligent Surfaces with In-Phase and Quadrature Modulation</span>
+        <span class="a">Yu Luo, <em>Lina Pu</em>, and Aijun Song</span>
+        <span class="v">IEEE Journal of Oceanic Engineering, pp.&nbsp;1&ndash;32, 2025.</span>
+        <span class="links">
+          <span class="tag">Journal</span>
+          <a class="tag" href="https://arxiv.org/abs/2411.12906" target="_blank" rel="noopener">arXiv:2411.12906</a>
+        </span>
+      </li>
+      <li>
+        <span class="t">Underwater Acoustic Reconfigurable Intelligent Surfaces: from Principle to Practice</span>
+        <span class="a">Yu Luo, <em>Lina Pu</em>, Junming Diao, Chun-Hung Liu, and Aijun Song</span>
+        <span class="v">IEEE Communications Standards Magazine, pp.&nbsp;1&ndash;7, 2025.</span>
+        <span class="links">
+          <span class="tag">Magazine</span>
+          <a class="tag" href="https://doi.org/10.1109/MCOMSTD.2025.3572257" target="_blank" rel="noopener">doi:10.1109/MCOMSTD.2025.3572257</a>
+          <a class="tag" href="https://arxiv.org/abs/2412.17865" target="_blank" rel="noopener">arXiv:2412.17865</a>
+        </span>
+      </li>
+    </ol>
+
+    <p style="font-size:.88rem;color:var(--muted);margin-top:22px;max-width:70ch">
+      A complete publication list is available on the
+      <a href="https://sites.ua.edu/lpu/" target="_blank" rel="noopener">PI's departmental page</a>.
+      Models, datasets, and the AquaSim&#8209;RIS simulator produced under this award will be released openly as they mature.
+    </p>
+  </div>
+</section>
+
+<!-- ============ PEOPLE ============ -->
+<section id="people" class="alt">
+  <div class="wrap">
+    <span class="kicker">People</span>
+    <h2>Project team</h2>
+
+    <div class="person">
+      <img class="ph" id="pi-photo" src="images/lina-pu.jpg" alt="Lina Pu" width="538" height="538">
+      <div>
+        <h3>Lina Pu</h3>
+        <p class="role">Principal Investigator</p>
+        <p class="aff">Department of Computer Science, The University of Alabama</p>
+        <p>The PI works at the intersection of underwater acoustic networking and passive, battery&#8209;free wireless communication. With seed funding from the Alabama Water Institute she built the first working UA&#8209;RIS prototype and carried out its first lake&#8209;scale field trial, the experimental backbone for this project. Her earlier work on asymmetric collision phenomena, range uncertainty, and MAC protocol evaluation in sea trials received a Best Paper Award at IFIP Networking, and she has led two NSF projects on battery&#8209;free RF backscatter systems whose passive synchronization results directly seeded the passive localization idea in Thrust&nbsp;2.</p>
+        <p style="margin-bottom:0">
+          <a href="https://sites.ua.edu/lpu/" target="_blank" rel="noopener">Faculty page</a> &nbsp;&middot;&nbsp;
+          <a href="mailto:lina.pu@ua.edu">lina.pu@ua.edu</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="join">
+      <h3>Opportunities</h3>
+      <p>Graduate and undergraduate students interested in underwater acoustics, wireless networking, embedded systems, or ocean robotics are encouraged to get in touch. Undergraduates can also engage through the USGS FLOW Academy, REU programs, and the University's Randall Scholar and Emerging Scholar programs. Write to <a href="mailto:lina.pu@ua.edu">lina.pu@ua.edu</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION & OUTREACH ============ -->
+<section id="outreach">
+  <div class="wrap">
+    <span class="kicker">Related Education &amp; Outreach</span>
+    <h2>Building the water&#8209;technology workforce</h2>
+    <p class="sub">Ongoing education and outreach efforts by the PI that connect directly to the themes of this project. These activities are supported separately and are not funded by this award.</p>
+
+    <article class="card" style="margin-bottom:22px">
+      <span class="num">Curriculum &middot; CIROH</span>
+      <h3>A multidisciplinary curriculum for hydrologic instrumentation</h3>
+      <p>Tomorrow's hydrologists, coastal engineers, and blue&#8209;tech entrepreneurs need to work across hydrology, electronics, wireless networking, edge computing, and data analytics. As Co&#8209;PI on the CIROH&#8209;supported project <em>Development of Multidisciplinary Curriculum for Future Workforce in Hydrologic Instrumentation</em>, the PI designed and taught the University of Alabama's first special topics course integrating IoT technology with hydrology. She also created the University's first IoT course, now offered annually.</p>
+    </article>
+
+    <article class="card figcard">
+      <div class="shotrow">
+        <figure>
+          <img src="images/flow-2025.jpg" alt="Tech Showcase at the 2025 USGS FLOW Academy" width="1000" height="1523">
+          <figcaption>Tech Showcase, 2025</figcaption>
+        </figure>
+        <figure>
+          <img src="images/flow-2026.jpg" alt="Tech Showcase at the 2026 USGS FLOW Academy" width="1000" height="1287">
+          <figcaption>Tech Showcase, 2026</figcaption>
+        </figure>
+      </div>
+      <span class="num">Workforce training &middot; 2025 and 2026</span>
+      <h3>USGS FLOW Academy</h3>
+      <p>The USGS&#8209;funded FLOW Academy (Future Leaders in Observation of Water) is a national summer program that immerses undergraduate and graduate students in hands&#8209;on water&#8209;observing technology. The PI has served in both cohorts to date. As <strong>Innovation Mentor</strong> in 2025, she mentored a student team building an affordable, open&#8209;source PIV system for riverine velocimetry. As <strong>Technical Expert</strong> in 2026, she developed a series of lectures and workshops on water&#8209;observation sensing, networking, and computing.</p>
+    </article>
+  </section>
+
+<!-- ============ PHOTOS ============ -->
+<section id="photos" class="alt">
+  <div class="wrap">
+    <span class="kicker">Photos</span>
+    <h2>Prototype, bench, and field</h2>
+    <p class="sub">The UA&#8209;RIS prototype and the experiments that validated it, built with seed funding from the Alabama Water Institute and forming the experimental groundwork for this project.</p>
+
+    <div class="gallery">
+      <figure class="shot">
+        <img src="images/prototype.jpg" alt="The UA-RIS reflector array, a six by four grid of piezoelectric elements" width="1300" height="1112">
+        <figcaption><b>UA&#8209;RIS reflector array</b>Twenty&#8209;four piezoelectric reflector elements arranged in a 6&times;4 array, each individually tunable to set the phase of the acoustic wave it reflects.</figcaption>
+      </figure>
+      <figure class="shot portrait">
+        <img src="images/control-board.jpg" alt="The impedance control board driving the reflector array" width="1100" height="1467">
+        <figcaption><b>Impedance control board</b>The multi&#8209;channel control electronics behind the array, replacing the varactor loads used in radio&#8209;frequency RIS with a network sized for tens&#8209;of&#8209;kilohertz acoustic transducers.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="images/tank-test.jpg" alt="Reflector elements under test in a water tank" width="1466" height="1100">
+        <figcaption><b>Water tank characterization</b>Bench testing of the reflector elements in a controlled tank, used to check element response before taking the array into open water.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="images/lake-trial.jpg" alt="Field trial site on a lake with instrumentation on the bank" width="1400" height="1050">
+        <figcaption><b>Lake field trial</b>The first lake&#8209;scale deployment of a working UA&#8209;RIS, with transmitter and receiver positioned across the site to measure the steered reflection against the direct path.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Acknowledgment</h4>
+        <p class="ack">This material is based upon work supported by the National Science Foundation under Grant No.&nbsp;2544545. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="foot-links">
+          <li>Lina Pu, Principal Investigator</li>
+          <li><a href="mailto:lina.pu@ua.edu">lina.pu@ua.edu</a></li>
+          <li>Department of Computer Science</li>
+          <li>The University of Alabama, Tuscaloosa, AL</li>
+          <li style="margin-top:12px"><a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2544545" target="_blank" rel="noopener">NSF Award 2544545 &#8599;</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; <span id="yr">2026</span> Lina Pu, The University of Alabama.</span>
+      <span>NSF CAREER &middot; CISE/IIS &middot; Jul 2026 &ndash; Jun 2031</span>
+      <span>Last updated <span id="upd">August 2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  // Safety net for any image that failed before its handler attached.
+  document.querySelectorAll('figure.shot img').forEach(function(img){
+    if(img.complete && img.naturalWidth===0){
+      var n=img.getAttribute('src').split('/').pop();
+      img.replaceWith(ph(n));
+    }
+  });
+
+  // NSF logo: hide the link entirely rather than show a broken image.
+  var nsf=document.getElementById('nsf-logo');
+  function hideNsf(){ if(nsf && nsf.parentElement) nsf.parentElement.style.display='none'; }
+  if(nsf){
+    if(nsf.complete && nsf.naturalWidth===0){hideNsf();}
+    else{nsf.addEventListener('error',hideNsf);}
+  }
+
+  // PI headshot: show a labelled slot until images/lina-pu.jpg exists.
+  var pi=document.getElementById('pi-photo');
+  function piSlot(){
+    var d=document.createElement('div');
+    d.className='ph';
+    d.setAttribute('style','display:flex;align-items:center;justify-content:center;text-align:center;'+
+      'padding:12px;color:#93a7b1;font-size:.72rem;border:1px dashed #c3d1d8;border-radius:12px');
+    d.innerHTML='<code>images/lina-pu.jpg</code>';
+    pi.replaceWith(d);
+  }
+  if(pi){
+    if(pi.complete && pi.naturalWidth===0){piSlot();}
+    else{pi.addEventListener('error',piSlot);}
+  }
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // Scrollspy for the sticky nav.
+  var links=[].slice.call(document.querySelectorAll('.nav ul a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.toggle('on', l.getAttribute('href')==='#'+e.target.id);});
+      }
+    });
+  },{rootMargin:'-64px 0px -70% 0px',threshold:0});
+  secs.forEach(function(s){io.observe(s);});
+});
+</script>
+</body>
+</html>
